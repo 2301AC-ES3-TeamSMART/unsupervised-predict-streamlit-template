@@ -45,7 +45,7 @@ def main():
 
     # DO NOT REMOVE the 'Recommender System' option below, however,
     # you are welcome to add more options to enrich your app.
-    page_options = ["Recommender System","Solution Overview"]
+    page_options = ["Recommender System","SMARTai"]
 
     # -------------------------------------------------------------------
     # ----------- !! THIS CODE MUST NOT BE ALTERED !! -------------------
@@ -100,11 +100,42 @@ def main():
     # -------------------------------------------------------------------
 
     # ------------- SAFE FOR ALTERING/EXTENSION -------------------
-    if page_selection == "Solution Overview":
-        st.title("Solution Overview")
-        st.write("Describe your winning approach on this page")
+    if page_selection == "SMARTai":
+        st.title("About SMART Solutions")
+        st.write("We are a team of smart, dedicated and motivated data scientist\
+                    with the drive to profer updated solutions and modern \
+                    approach to solving problems across different insdustries")
+        st.title("What we have here is a recommendaion system, and this solution\
+                    is implemented in Streaming Industry, E-commerce and lots\
+                    more")
+    #------------------------------------------------------------------------
+    #--------------------Image Slider----------------------------------------
+        st.title("Welcome to SMART Recommender")
 
+        # Assuming you have a list of image paths or URLs
+        image_paths = [
+            "resources/imgs/slide/Image1.jpg",,
+            "resources/imgs/slide/image2.jpg",
+            "resources/imgs/slide/image3.jpg",
+            "resources/imgs/slide/image4.jpg",
+            "resources/imgs/slide/image5.jpg",
+            "resources/imgs/slide/image6.jpg",
+            "resources/imgs/slide/image7.jpg",
+            "resources/imgs/slide/image8.jpg",
+            "resources/imgs/slide/image9.jpg",
+            "resources/imgs/slide/image10.jpg",
+        ]
+
+    # Display a slider widget to choose the index of the image
+        selected_index = st.slider("Select an image", 0, len(image_paths) - 1, 0)
+
+        # Display the selected image based on the slider value
+        st.image(image_paths[selected_index], use_column_width=True)
     # You may want to add more sections here for aspects such as an EDA,
+
+        st.title("Here, we will break down our approach and show you why this\
+                    is important to you")
+
     # or to provide your business pitch.
 
 
