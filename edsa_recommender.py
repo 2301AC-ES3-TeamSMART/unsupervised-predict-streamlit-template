@@ -31,7 +31,7 @@ import streamlit as st
 # Data handling dependencies
 import pandas as pd
 import numpy as np
-
+import matplotlib.pyplot as plt
 # Custom Libraries
 from utils.data_loader import load_movie_titles
 from recommenders.collaborative_based import collab_model
@@ -116,41 +116,26 @@ def main():
                     is implemented in Streaming Industry, E-commerce and lots\
                     more")
     #------------------------------------------------------------------------
-    #--------------------Image Slider----------------------------------------
-       
+    #--------------------Dataset info----------------------------------------
+
 
         st.title("Welcome to SMART Recommender")
 
-        # Assuming you have a list of image paths or URLs
-        image_paths = [
-            "resources/imgs/slide/image1.jpg",
-            "resources/imgs/slide/image2.jpg",
-            "resources/imgs/slide/image3.jpg",
-            "resources/imgs/slide/image4.jpg",
-            "resources/imgs/slide/image5.jpg",
-            "resources/imgs/slide/image6.jpg",
-            "resources/imgs/slide/image7.jpg",
-            "resources/imgs/slide/image8.jpg",
-            "resources/imgs/slide/image9.avif",
-            "resources/imgs/slide/image10.jpg",
-        ]
+        def load_data():
+            df_movies = pd.read_csv('resources/data/movies.csv')
+            df_ratings = pd.read_csv('resources/data/ratings.csv')
+            return df_movies, df_ratings
 
-        # Display a slider widget to choose the index of the image
-        selected_index = st.slider("Select an image", 0, len(image_paths) - 1, 0)
+        df_movies, df_ratings = load_data()
 
-        # Display the selected image based on the slider value
-        st.image(image_paths[selected_index], use_column_width=True, width=None)
+        st.header("A snick pick into the data we are working with")
 
-        # Empty space for sliding effect
-        placeholder = st.empty()
+        st.header("Movies Dataset")
+        st.dataframe(df_movies.head())
 
-        # Sliding effect logic
-        while True:
-            for i in range(len(image_paths)):
-                st.image(image_paths[i], use_column_width=True, width=None)
-                placeholder.empty()  # Clear the previous image
-                placeholder = st.empty()  # Create an empty space for the next image
-                st.title("Here, we will break down our approach and show you why this is important to you")
+        st.header("Ratings Dataset")
+        st.dataframe(df_ratings.head())
+
 
 
     # or to provide your business pitch.
