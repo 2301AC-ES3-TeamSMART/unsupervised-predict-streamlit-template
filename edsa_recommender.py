@@ -32,6 +32,8 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import seaborn as sns
+
 # Custom Libraries
 from utils.data_loader import load_movie_titles
 from recommenders.collaborative_based import collab_model
@@ -112,7 +114,7 @@ def main():
         st.write("We are a team of smart, dedicated and motivated data scientist\
                     with the drive to profer updated solutions and modern \
                     approach to solving problems across different insdustries")
-        st.title("What we have here is a recommendaion system, and this solution\
+        st.write("What we have here is a recommendaion system, and this solution\
                     is implemented in Streaming Industry, E-commerce and lots\
                     more")
     #------------------------------------------------------------------------
@@ -128,7 +130,7 @@ def main():
 
         df_movies, df_ratings = load_data()
 
-        st.header("A snick pick into the data we are working with")
+        st.write("A snick pick into the data we are working with")
 
         st.header("Movies Dataset")
         st.dataframe(df_movies.head())
@@ -136,7 +138,47 @@ def main():
         st.header("Ratings Dataset")
         st.dataframe(df_ratings.head())
 
+        # We merge the movies and ratings dataset using the 'movieId' column as the common column in both dataframes
+        df_merged = pd.merge(df_ratings, df_movies, on='movieId')
 
+        st.titel('Top 10 Movies by Total Ratings and Genres')
+        popularity_df = df_ratings.groupby('movieId')['rating'].count().reset_index()
+        popularity_df.rename(columns={'rating': 'total_ratings'}, inplace=True)
+        popularity_df = popularity_df.merge(df_movies[['movieId', 'title', 'genres']], on='movieId', how='left')
+        popularity_df = popularity_df.sort_values(by='total_ratings', ascending=False)
+
+        # Set the number of top movies to display
+        top_n_movies = 10
+
+        # Sort the dataframe in descending order based on total_ratings
+        top_movies_df = popularity_df.sort_values(by='total_ratings', ascending=False).head(top_n_movies)
+
+        # Create a bar plot to visualize the top-rated movies
+        plt.figure(figsize=(12, 6))
+        sns.barplot(x='total_ratings', y='title', data=top_movies_df, palette='viridis')
+        plt.title(f"Top {top_n_movies} Movies by Total Ratings")
+        plt.xlabel("Total Ratings")
+        plt.ylabel("Movie Title")
+        plt.show()
+
+        st.titel('Top 20 User Preferences by Genre: Distribution of Ratings')
+
+        # Genre Preferences
+        genre_preferences = df_ratings.merge(df_movies[['movieId', 'genres']], on='movieId', how='left')
+        genre_preferences = genre_preferences.groupby('genres')['rating'].count().reset_index()
+        genre_preferences.rename(columns={'rating': 'total_ratings'}, inplace=True)
+
+        # Select the top twenty genres based on total ratings
+        top_twenty_genres = genre_preferences.nlargest(20, 'total_ratings')
+
+        plt.figure(figsize=(12, 6))
+        sns.barplot(x='genres', y='total_ratings', data=top_twenty_genres, palette='viridis')
+        plt.title("Top 20 User Preferences by Genre: Distribution of Ratings")
+        plt.xlabel("Genre")
+        plt.ylabel("Total Ratings")
+        plt.xticks(rotation=45, ha='right')  # Rotate genre labels for better readability
+        plt.tight_layout()  # Adjust plot layout to prevent label overlap
+        plt.show()
 
     # or to provide your business pitch.
 
