@@ -117,6 +117,8 @@ def main():
                     more")
     #------------------------------------------------------------------------
     #--------------------Image Slider----------------------------------------
+       
+
         st.title("Welcome to SMART Recommender")
 
         # Assuming you have a list of image paths or URLs
@@ -133,16 +135,23 @@ def main():
             "resources/imgs/slide/image10.jpg",
         ]
 
-    # Display a slider widget to choose the index of the image
+        # Display a slider widget to choose the index of the image
         selected_index = st.slider("Select an image", 0, len(image_paths) - 1, 0)
 
         # Display the selected image based on the slider value
-        st.image(image_paths[selected_index], use_column_width=True)
-    # You may want to add more sections here for aspects such as an EDA,
+        st.image(image_paths[selected_index], use_column_width=True, width=None)
 
-        st.title("Here, we will break down our approach and show you why this\
-                    is important to you")
-        
+        # Empty space for sliding effect
+        placeholder = st.empty()
+
+        # Sliding effect logic
+        while True:
+            for i in range(len(image_paths)):
+                st.image(image_paths[i], use_column_width=True, width=None)
+                placeholder.empty()  # Clear the previous image
+                placeholder = st.empty()  # Create an empty space for the next image
+                st.title("Here, we will break down our approach and show you why this is important to you")
+
 
     # or to provide your business pitch.
 
