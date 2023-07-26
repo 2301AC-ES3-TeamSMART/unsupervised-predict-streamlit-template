@@ -190,7 +190,17 @@ def main():
 
         # Display the Seaborn plot in Streamlit using st.pyplot()
         st.title("Rating Distribution")
-        st.pyplot()
+        # Create a scatter plot using Matplotlib
+        fig, ax = plt.subplots()
+        ax.scatter(df_ratings['movieId'], df_ratings['rating'], alpha=0.5)  # Adjust alpha for transparency
+        ax.set_xlabel("Movie ID")
+        ax.set_ylabel("Rating")
+        ax.set_title("Scatter Plot: Movie ID vs. Rating")
+
+        # Display the Matplotlib plot in Streamlit using st.pyplot()
+        st.title("Custom Scatter Plot: Movie ID vs. Rating")
+        st.pyplot(fig)
+
 
         # Calculate and display the average rating in the Streamlit app
         average_rating = np.mean(df_ratings["rating"])
