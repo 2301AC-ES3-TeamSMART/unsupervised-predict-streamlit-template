@@ -42,30 +42,10 @@ title_list = load_movie_titles('resources/data/movies.csv')
 
 st.set_page_config(page_title="SMARTAI", page_icon="::", layout="wide")
 
-bg_img = """
-<style>
-[data-testid="stAppViewContainer"] {
-background-image: url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80');
-background-size: cover;
-background-position: top center;
-}
+# Function to style headers and subheaders in red
+def style_text_in_red(text):
+    return f'<span style="color: red;">{text}</span>'
 
-[data-testid="stHeader"] {
-background-color: rgba(0, 0, 0, 0);
-}
-
-[data-testid="stToolbar"] {
-right: 2rem;
-}
-
-[data-testid="stSidebar"] {
-background-image: url('https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80');
-background-size: cover;
-background-position: top;
-}
-</style>
-"""
-st.markdown(bg_img, unsafe_allow_html=True)
 
 # App declaration
 def main():
@@ -80,8 +60,8 @@ def main():
     page_selection = st.sidebar.selectbox("Choose Option", page_options)
     if page_selection == "Recommender System":
         # Header contents
-        st.write('# Movie Recommender Engine')
-        st.write('### EXPLORE Data Science Academy Unsupervised Predict')
+        # st.write('# Movie Recommender Engine')
+        # st.write('### EXPLORE Data Science Academy Unsupervised Predict')
         st.image('resources/imgs/Image_header.png',use_column_width=True)
         # Recommender System algorithm selection
         sys = st.radio("Select an algorithm",
@@ -168,4 +148,35 @@ def main():
 
 
 if __name__ == '__main__':
+    # Apply background image styling
+    bg_img = """
+    <style>
+    /* Background image for the main container */
+    [data-testid="stAppViewContainer"] {
+        background-image: url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80');
+        background-size: cover;
+        background-position: top center;
+    }
+
+    /* Transparent background for the header */
+    [data-testid="stHeader"] {
+        background-color: rgba(0, 0, 0, 0);
+    }
+
+    /* Move the sidebar to the right and apply background image */
+    [data-testid="stSidebar"] {
+        right: 2rem;
+        background-image: url('https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80');
+        background-size: cover;
+        background-position: top;
+    }
+    </style>
+    """
+    st.markdown(bg_img, unsafe_allow_html=True)
+
+    # Apply red text styling for headers and subheaders
+    header_html = f'<h1 style="color: red;">Movie Recommender Engine</h1>'
+    subheader_html = f'<h3 style="color: red;">EXPLORE Data Science Academy Unsupervised Predict</h3>'
+    st.markdown(header_html, unsafe_allow_html=True)
+    st.markdown(subheader_html, unsafe_allow_html=True)
     main()
