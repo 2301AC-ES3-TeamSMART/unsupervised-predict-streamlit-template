@@ -121,7 +121,7 @@ def main():
 
         # Assuming you have a list of image paths or URLs
         image_paths = [
-            "resources/imgs/slide/Image1.jpg",
+            "resources/imgs/slide/image1.jpg",
             "resources/imgs/slide/image2.jpg",
             "resources/imgs/slide/image3.jpg",
             "resources/imgs/slide/image4.jpg",
