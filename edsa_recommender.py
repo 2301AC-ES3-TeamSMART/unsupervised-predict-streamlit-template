@@ -40,6 +40,33 @@ from recommenders.content_based import content_model
 # Data Loading
 title_list = load_movie_titles('resources/data/movies.csv')
 
+st.set_page_config(page_title="SMARTAI", page_icon="::", layout="wide")
+
+bg_img = """
+<style>
+[data-testid="stAppViewContainer"] {
+background-image: url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80');
+background-size: cover;
+background-position: top center;
+}
+
+[data-testid="stHeader"] {
+background-color: rgba(0, 0, 0, 0);
+}
+
+[data-testid="stToolbar"] {
+right: 2rem;
+}
+
+[data-testid="stSidebar"] {
+background-image: url('https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80');
+background-size: cover;
+background-position: top;
+}
+</style>
+"""
+st.markdown(bg_img, unsafe_allow_html=True)
+
 # App declaration
 def main():
 
@@ -114,7 +141,7 @@ def main():
 
         # Assuming you have a list of image paths or URLs
         image_paths = [
-            "resources/imgs/slide/Image1.jpg",,
+            "resources/imgs/slide/Image1.jpg",
             "resources/imgs/slide/image2.jpg",
             "resources/imgs/slide/image3.jpg",
             "resources/imgs/slide/image4.jpg",
@@ -135,6 +162,7 @@ def main():
 
         st.title("Here, we will break down our approach and show you why this\
                     is important to you")
+        
 
     # or to provide your business pitch.
 
