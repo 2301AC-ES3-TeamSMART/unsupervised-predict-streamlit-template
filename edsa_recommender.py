@@ -183,6 +183,40 @@ def main():
         st.pyplot(plt)  # Display the Matplotlib plot in Streamlit
 
     # or to provide your business pitch.
+        # Plot the rating distribution using Seaborn
+        with sns.axes_style('white'):
+            g = sns.catplot(data=df_ratings, x="rating", y=None, aspect=2.0, kind='count')
+            g.set_ylabels("Total number of ratings")
+
+        # Display the Seaborn plot in Streamlit using st.pyplot()
+        st.title("Rating Distribution")
+        st.pyplot()
+
+        # Calculate and display the average rating in the Streamlit app
+        average_rating = np.mean(df_ratings["rating"])
+        st.write(f'Average rating in dataset: {average_rating:.2f}')
+
+# Load the 'df_ratings' and 'df_movies' DataFrames (you can replace this with your data loading code)
+        df_ratings = pd.read_csv('resources/data/ratings.csv')
+        df_movies = pd.read_csv('resources/data/movies.csv')
+
+        # Merge the DataFrames
+        df_merged = pd.merge(df_ratings, df_movies, on='movieId')
+
+        # Calculate the total ratings for each movie
+        popularity_df = df_ratings.groupby('movieId')['rating'].count().reset_index()
+        popularity_df.rename(columns={'rating': 'total_ratings'}, inplace=True)
+        popularity_df = popularity_df.merge(df_movies[['movieId', 'title', 'genres']], on='movieId', how='left')
+        popularity_df = popularity_df.sort_values(by='total_ratings', ascending=False)
+
+        # Calculate the percentage of movies with ratings of 3 and above
+        total_movies = len(popularity_df)
+        movies_with_rating_3_or_above = len(popularity_df[popularity_df['total_ratings'] >= 3])
+        percentage_movies_with_rating_3_or_above = (movies_with_rating_3_or_above / total_movies) * 100
+
+        # Display the percentage in the Streamlit app
+        st.title("Percentage of Movies with Ratings of 3 and Above")
+        st.write(f"{percentage_movies_with_rating_3_or_above:.2f}%")
 
 
 if __name__ == '__main__':
