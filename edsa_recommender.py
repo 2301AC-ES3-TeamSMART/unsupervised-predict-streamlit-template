@@ -159,7 +159,8 @@ def main():
         plt.title(f"Top {top_n_movies} Movies by Total Ratings")
         plt.xlabel("Total Ratings")
         plt.ylabel("Movie Title")
-        plt.show()
+        plt.tight_layout()  # To adjust spacing between the plot elements
+        st.pyplot(plt)  # Display the Matplotlib plot in Streamlit
 
         st.title('Top 20 User Preferences by Genre: Distribution of Ratings')
 
@@ -178,7 +179,8 @@ def main():
         plt.ylabel("Total Ratings")
         plt.xticks(rotation=45, ha='right')  # Rotate genre labels for better readability
         plt.tight_layout()  # Adjust plot layout to prevent label overlap
-        plt.show()
+        plt.tight_layout()  # To adjust spacing between the plot elements
+        st.pyplot(plt)  # Display the Matplotlib plot in Streamlit
 
     # or to provide your business pitch.
 
