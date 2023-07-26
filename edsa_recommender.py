@@ -141,7 +141,7 @@ def main():
         # We merge the movies and ratings dataset using the 'movieId' column as the common column in both dataframes
         df_merged = pd.merge(df_ratings, df_movies, on='movieId')
 
-        st.titel('Top 10 Movies by Total Ratings and Genres')
+        st.title('Top 10 Movies by Total Ratings and Genres')
         popularity_df = df_ratings.groupby('movieId')['rating'].count().reset_index()
         popularity_df.rename(columns={'rating': 'total_ratings'}, inplace=True)
         popularity_df = popularity_df.merge(df_movies[['movieId', 'title', 'genres']], on='movieId', how='left')
@@ -161,7 +161,7 @@ def main():
         plt.ylabel("Movie Title")
         plt.show()
 
-        st.titel('Top 20 User Preferences by Genre: Distribution of Ratings')
+        st.title('Top 20 User Preferences by Genre: Distribution of Ratings')
 
         # Genre Preferences
         genre_preferences = df_ratings.merge(df_movies[['movieId', 'genres']], on='movieId', how='left')
