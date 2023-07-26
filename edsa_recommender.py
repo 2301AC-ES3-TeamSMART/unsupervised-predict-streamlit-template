@@ -129,7 +129,7 @@ def main():
             "resources/imgs/slide/image6.jpg",
             "resources/imgs/slide/image7.jpg",
             "resources/imgs/slide/image8.jpg",
-            "resources/imgs/slide/image9.jpg",
+            "resources/imgs/slide/image9.avif",
             "resources/imgs/slide/image10.jpg",
         ]
 
