@@ -191,7 +191,7 @@ def main():
         # Display the Seaborn plot in Streamlit using st.pyplot()
         st.title("Rating Distribution")
         st.pyplot()
-
+        st.set_option('deprecation.showPyplotGlobalUse', False)
         # Calculate and display the average rating in the Streamlit app
         average_rating = np.mean(df_ratings["rating"])
         st.write(f'Average rating in dataset: {average_rating:.2f}')
